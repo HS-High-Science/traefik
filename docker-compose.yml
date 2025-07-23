@@ -1,3 +1,4 @@
+---
 services:
   traefik:
     image: "traefik:v3.4"
@@ -7,5 +8,11 @@ services:
       - "443:443"
       - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./configs/traefik.yml:/etc/traefik/traefik.yml:ro
+    networks:
+      - traefik
+    restart: unless-stopped
+networks:
+  traefik:
+    external: false
