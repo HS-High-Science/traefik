@@ -8,6 +8,15 @@ api:
   dashboard: true
   insecure: true
 
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: traefik
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+
 entryPoints:
   web:
     address: ":80"
