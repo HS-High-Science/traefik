@@ -8,7 +8,6 @@ services:
       - "443:443"
       - "8080:8080"
     environment:
-      - CF_API_EMAIL=${CF_API_EMAIL}
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -17,7 +16,7 @@ services:
       - ./data/certs/:/var/traefik/certs/:rw
     networks:
       - traefik
-    restart: unless-stopped
+    restart: never
 networks:
   traefik:
     external: false
