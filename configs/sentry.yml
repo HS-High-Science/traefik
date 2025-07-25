@@ -24,7 +24,7 @@ http:
       service: sentry@file
       rule: "Host(`sentry.asynchronite.dev`)"
       tls:
-        certResolver: letsencrypt # Assuming you have a TLS certificate resolver named "letsencrypt"
+        certResolver: cloudflare # Assuming you have a TLS certificate resolver named "letsencrypt"
       # Enable middleware as needed
       middlewares:
         - https_redirect@file
