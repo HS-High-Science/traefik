@@ -1,5 +1,5 @@
 http:
   routers:
     sentry:
-      rule: "Host(`sentry.unnamed.games`)"
+      rule: "Host(`sentry.asynchronite.dev`)"
       service: sentry
