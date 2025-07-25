@@ -16,7 +16,7 @@ services:
       - ./data/certs/:/var/traefik/certs/:rw
     networks:
       - traefik
-    restart: never
+    restart: no
 networks:
   traefik:
     external: false
