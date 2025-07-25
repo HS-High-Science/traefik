@@ -2,13 +2,22 @@ global:
   checkNewVersion: true
   sendAnonymousUsage: false
 log:
-  level: DEBUG
+  level: 
+  
 api:
   dashboard: true
   insecure: true
+
 entryPoints:
   web:
     address: ":80"
   websecure:
     address: ":443"
     asDefault: true
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      storage: /var/traefik/certs/cloudflare-acme.json
+      dnsChallenge:
+        provider: cloudflare

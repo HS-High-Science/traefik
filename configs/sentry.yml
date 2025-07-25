@@ -1,0 +1,72 @@
+http:
+  routers:
+    # Handle CORS-related headers for ingest endpoints.
+    # You can also only expose the ingest endpoints only,
+    # by removing the other `handle` directive.
+    #
+    # It is recomended to put a rate limiter on the ingest endpoints.
+    sentry-ingest:
+      entryPoints:
+        - web # Assuming this your HTTP entrypoint
+        - websecure # Assuming this is your HTTPS entrypoint
+      service: sentry@file
+      rule: "Host(`sentry.asynchronite.dev`) && PathRegexp(`^/api/[1-9]+/(envelope|minidump|security|store|unreal)`)"
+      tls:
+        certResolver: cloudflare # Assuming you have a TLS certificate resolver named "letsencrypt"
+      middlewares:
+        - https_redirect@file
+        - cors_headers@file # For handling browser clients
+        - rate_limiter@file
+    sentry:
+      entryPoints:
+        - web # Assuming this your HTTP entrypoint
+        - websecure # Assuming this is your HTTPS entrypoint
+      service: sentry@file
+      rule: "Host(`sentry.asynchronite.dev`)"
+      tls:
+        certResolver: letsencrypt # Assuming you have a TLS certificate resolver named "letsencrypt"
+      # Enable middleware as needed
+      middlewares:
+        - https_redirect@file
+
+  services:
+    sentry:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:9000"
+        healthCheck:
+          scheme: http
+          path: /_health/
+          interval: 30s
+          timeout: 10s
+        passHostHeader: true
+
+  middlewares:
+    https_redirect:
+      redirectScheme:
+        scheme: "https"
+        port: "443"
+        permanent: true
+    cors_headers:
+      headers:
+        customResponseHeaders:
+          addVaryHeader: true
+          # If you want to set this to true, adjust "accessControlAllowOriginList" to a valid domain and remove the asterisk wildcard
+          accessControlAllowCredentials: false
+          accessControlAllowOriginList:
+            - "*"
+          accessControlAllowHeaders:
+            - "sentry-trace"
+            - "baggage"
+          accessControlAllowMethods:
+            - GET
+            - POST
+            - PUT
+          accessControlExposeHeaders:
+            - "sentry-trace"
+            - "baggage"
+    rate_limiter:
+      rateLimit:
+        average: 100
+        period: 1s
+        burst: 150
