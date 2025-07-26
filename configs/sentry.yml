@@ -33,7 +33,7 @@ http:
     sentry:
       loadBalancer:
         servers:
-          - url: "http://sentry.astrohweston.xyz:9000"
+          - url: "http://localhost:9000"
         healthCheck:
           scheme: http
           path: /_health/
