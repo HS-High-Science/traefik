@@ -10,7 +10,7 @@ http:
         - web # Assuming this your HTTP entrypoint
         - websecure # Assuming this is your HTTPS entrypoint
       service: sentry@file
-      rule: "Host(`sentry.astrohweston.xyz`) && PathRegexp(`^/api/[1-9]+/(envelope|minidump|security|store|unreal)`)"
+      rule: "Host(`sentry.asynchronite.dev`) && PathRegexp(`^/api/[1-9]+/(envelope|minidump|security|store|unreal)`)"
       tls:
         certResolver: cloudflare # Assuming you have a TLS certificate resolver named "letsencrypt"
       middlewares:
@@ -22,7 +22,7 @@ http:
         - web # Assuming this your HTTP entrypoint
         - websecure # Assuming this is your HTTPS entrypoint
       service: sentry@file
-      rule: "Host(`sentry.astrohweston.xyz`)"
+      rule: "Host(`sentry.asynchronite.dev`)"
       tls:
         certResolver: cloudflare # Assuming you have a TLS certificate resolver named "letsencrypt"
       # Enable middleware as needed
@@ -33,7 +33,7 @@ http:
     sentry:
       loadBalancer:
         servers:
-          - url: "http://localhost:9000"
+          - url: "http://132.145.148.188:9000"
         healthCheck:
           scheme: http
           path: /_health/
