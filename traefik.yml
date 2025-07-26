@@ -31,3 +31,13 @@ certificatesResolvers:
       storage: /var/traefik/certs/cloudflare-acme.json
       dnsChallenge:
         provider: cloudflare
+
+https:
+  address: ":443"
+  asDefault: true
+  http:
+    tls:
+      certResolver: "cloudflare"
+  http2:
+    maxConcurrentStreams: 250
+  http3: {}
