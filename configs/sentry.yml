@@ -33,7 +33,7 @@ http:
     sentry:
       loadBalancer:
         servers:
-          - url: "http://132.145.148.188:9000"
+          - url: "http://localhost:9000"
         healthCheck:
           scheme: http
           path: /_health/
