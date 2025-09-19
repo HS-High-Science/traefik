@@ -5,8 +5,7 @@ log:
   level: DEBUG
   
 api:
-  dashboard: true
-  insecure: true
+  dashboard: false
 
 providers:
   docker:
