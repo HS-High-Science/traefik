@@ -3,7 +3,7 @@ http:
     nextcloud:
       rule: "Host(`cloud.asynchronite.dev`)"
       entrypoints:
-        - "https"
+        - "websecure"
       service: nextcloud
       middlewares:
         - nextcloud-chain
