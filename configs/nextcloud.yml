@@ -1,7 +1,7 @@
 http:
   routers:
     nextcloud:
-      rule: "Host(`cloud.asynchronite.dev`)"
+      rule: "Host(`cloudy.asynchronite.dev`)"
       entrypoints:
         - "websecure"
       service: nextcloud
