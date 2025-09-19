@@ -8,7 +8,7 @@ http:
       middlewares:
         - nextcloud-chain
       tls:
-        certresolver: "letsencrypt"
+        certresolver: "cloudflare"
 
   services:
     nextcloud:
