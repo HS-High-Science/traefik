@@ -6,6 +6,7 @@ http:
         - "websecure"
       service: nextcloud
       middlewares:
+        - https-redirect
         - nextcloud-chain
       tls:
         certresolver: "cloudflare"
@@ -14,7 +15,8 @@ http:
     nextcloud:
       loadBalancer:
         servers:
-          - url: "http://localhost:11000" # Adjust to match APACHE_PORT and APACHE_IP_BINDING. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md#adapting-the-sample-web-server-configurations-below
+          - url: "http://132.145.148.188:11000" # Adjust to match APACHE_PORT and APACHE_IP_BINDING. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md#adapting-the-sample-web-server-configurations-below
+        passHostHeader: true
 
   middlewares:
     nextcloud-secure-headers:
